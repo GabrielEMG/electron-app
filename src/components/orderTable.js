@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomTable from "./customTable";
 import FilterSearcher from "./filterSearcher";
 import { useSelector } from "react-redux";
+import monthFilter from "../helpers/monthFilter";
 
-const OrderTable = () => {
+const OrderTable = (props) => {
   const orders = useSelector((selector) => selector.orders);
-  const [filter, setFilter] = useState(orders);
+  const [dateFilter, setDateFilter] = useState(orders);
+  const [filter, setFilter] = useState(dateFilter);
+
+  useEffect(() => {
+    setDateFilter(monthFilter(orders, props.month, props.year));
+  }, [props.month, props.year, orders]);
+
+  useEffect(() => {
+    setFilter(dateFilter);
+  }, [dateFilter]);
+
   return (
     <div>
       <FilterSearcher

@@ -8,47 +8,36 @@ import ClientForm from "../../components/clientForm";
 import OrderForm from "../../components/orderForm";
 import Sumary from "../../components/sumary";
 import Carousel from "../../components/carousel";
+import NavigationDate from "../../components/navigationDate";
 
 const HomePage = () => {
-  const [state, setState] = useState({
+  const [date, setDate] = useState({
     year: new Date().getFullYear(),
     month: new Date().getMonth(),
   });
-  const changeYear = (year) => {
-    setState((prev) => {
-      return { ...prev, year };
-    });
-  };
-  const changeMonth = (month) => {
-    setState((prev) => {
-      return { ...prev, month };
-    });
-  };
+  console.log(date);
   return (
     <div>
       <div>
-        años <Button onClick={(e) => changeYear(2020)}>2020</Button>
-        <Button onClick={(e) => changeYear(2020)}>2021</Button>
-      </div>
-      mes <Button onClick={(e) => changeYear(10)}>noviembre</Button>
-      <Button onClick={(e) => changeMonth(11)}>diciembre</Button>
-      <div>
-        <Sumary year={state.year} month={state.month} />
+        <NavigationDate setDate={setDate} date={date} />
       </div>
       <div>
+        <Sumary year={date.year} month={date.month} />
+      </div>
+      <div>
+        <PopMenu action="Agregar orden" buttonTitle="Agregar orden">
+          <OrderForm />
+        </PopMenu>
         <PopMenu action="Agregar compra" buttonTitle="Agregar compra">
-          <BuyForm year={state.year} month={state.month} />
+          <BuyForm />
         </PopMenu>
         <PopMenu action="Agregar cliente" buttonTitle="Agregar cliente">
           <ClientForm />
         </PopMenu>
-        <PopMenu action="Agregar orden" buttonTitle="Agregar orden">
-          <OrderForm />
-        </PopMenu>
       </div>
       <Carousel buttons={["Ordenes", "Compras", "Clientes"]}>
-        <OrderTable />
-        <BuyTable />
+        <OrderTable year={date.year} month={date.month} />
+        <BuyTable year={date.year} month={date.month} />
         <ClientTable />
       </Carousel>
     </div>

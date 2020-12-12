@@ -14,16 +14,17 @@ const CustomTable = (props) => {
         </tr>
       </thead>
       <tbody>
-        {props.data.map((item, i) => (
-          <CustomTableItem
-            withCompletedCheck={props.withCompletedCheck ? true : false}
-            item={item}
-            labelOrder={props.labelOrder}
-            index={i}
-            dbOrigin={props.dbOrigin}
-            key={i}
-          />
-        ))}
+        {props.data &&
+          props.data.map((item, i) => (
+            <CustomTableItem
+              withCompletedCheck={props.withCompletedCheck ? true : false}
+              item={item}
+              labelOrder={props.labelOrder}
+              index={i}
+              dbOrigin={props.dbOrigin}
+              key={i}
+            />
+          ))}
       </tbody>
     </Table>
   );

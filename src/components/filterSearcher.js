@@ -5,8 +5,6 @@ const FilterSearcher = (props) => {
     type: props.types[0],
     value: "",
   });
-  const data = props.data;
-  console.log(state, data);
   const handleChange = (e) => {
     setState((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
@@ -14,11 +12,11 @@ const FilterSearcher = (props) => {
   };
 
   useEffect(() => {
-    props.onChange(data);
+    props.onChange(props.data);
   }, [props.data]);
 
   useEffect(() => {
-    const filteredData = data.filter((doc) => {
+    const filteredData = props.data.filter((doc) => {
       const docValue = doc[state.type].toString().toLowerCase();
       const filter = state.value.toString().toLowerCase();
       return docValue.includes(filter);

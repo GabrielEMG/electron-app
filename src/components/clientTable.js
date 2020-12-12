@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CustomTable from "./customTable";
 import FilterSearcher from "./filterSearcher";
 import { useSelector } from "react-redux";
+import monthFilter from "../helpers/monthFilter";
 
-const ClientTable = () => {
+const ClientTable = (props) => {
   const clients = useSelector((selector) => selector.clients);
-  const [filter, setFilter] = useState(clients);
+  const [dateFilter, setDateFilter] = useState(clients);
+  const [filter, setFilter] = useState(dateFilter);
+  useEffect(() => {
+    setDateFilter(monthFilter(clients, props.month, props.year));
+  }, [props.month, props.year, clients]);
+
+  useEffect(() => {
+    setFilter(dateFilter);
+  }, [dateFilter]);
+
   return (
     <div>
       <FilterSearcher

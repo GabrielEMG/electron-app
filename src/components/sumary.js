@@ -4,7 +4,7 @@ import monthFilter from "../helpers/monthFilter";
 const Sumary = (props) => {
   let orders = useSelector((selector) => selector.orders);
   let buys = useSelector((selector) => selector.buys);
-  orders = monthFilter(oders, props.month, props.year);
+  orders = monthFilter(orders, props.month, props.year);
   buys = monthFilter(buys, props.month, props.year);
   let income = 0;
   let expense = 0;
