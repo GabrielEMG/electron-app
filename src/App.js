@@ -1,13 +1,9 @@
 import useLoadApp from "./hooks/useLoadApp";
-import PageHandler from "./pages/pageHandler";
+import HomePage from "./pages/homePage";
 
 const App = () => {
   useLoadApp();
-  return (
-    <div>
-      <PageHandler />
-    </div>
-  );
+  return <HomePage />;
 };
 
 export default App;

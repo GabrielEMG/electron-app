@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomInput from "./customInput";
 import db from "../db";
 import { useDispatch } from "react-redux";
-import { Button } from "@material-ui/core";
 
 const ClientForm = (props) => {
   const dispatch = useDispatch();
@@ -16,9 +15,16 @@ const ClientForm = (props) => {
       twitter: "",
     },
     location: "",
-    dateCreation: new Date(),
     lastBuy: "",
   });
+
+  useEffect(() => {
+    if (props.doAction) {
+      handleClick();
+      props.setDoAction(false);
+      props.setShow(false);
+    }
+  }, [props.doAction]);
 
   const handleClick = async () => {
     try {
@@ -81,10 +87,6 @@ const ClientForm = (props) => {
           onChange={setState}
         />
       </div>
-
-      <Button variant="contained" color="primary" onClick={() => handleClick()}>
-        agregar cliente
-      </Button>
     </div>
   );
 };

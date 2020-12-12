@@ -1,7 +1,6 @@
 import { useState } from "react";
 import NavigationNavbar from "../components/navigationNavbar";
 import HomePage from "./homePage";
-import MapPage from "./mapPage";
 import OrderFormPage from "./orderFormPage";
 import ClientFormPage from "./clientFormPage";
 import BuyFormPage from "./buyFormPage";
@@ -13,8 +12,6 @@ const PageHandler = () => {
     switch (page) {
       case "home":
         return <HomePage />;
-      case "map":
-        return <MapPage />;
       case "order-form":
         return <OrderFormPage />;
       case "client-form":

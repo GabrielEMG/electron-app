@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CustomInput from "./customInput";
 import db from "../db";
 import { useDispatch } from "react-redux";
-import { Button } from "@material-ui/core";
 
 const BuyForm = (props) => {
   const dispatch = useDispatch();
@@ -11,8 +10,15 @@ const BuyForm = (props) => {
     price: 0,
     quantity: 0,
     link: "",
-    date: new Date().toDateString(),
   });
+
+  useEffect(() => {
+    if (props.doAction) {
+      handleClick();
+      props.setDoAction(false);
+      props.setShow(false);
+    }
+  }, [props.doAction]);
 
   const handleClick = async () => {
     try {
@@ -54,8 +60,6 @@ const BuyForm = (props) => {
         type="text"
         onChange={setState}
       />
-
-      <Button onClick={() => handleClick()}>Agregar compra</Button>
     </div>
   );
 };

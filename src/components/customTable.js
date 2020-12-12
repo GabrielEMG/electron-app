@@ -6,6 +6,7 @@ const CustomTable = (props) => {
     <Table striped bordered hover size={props.small && "sm"}>
       <thead>
         <tr>
+          {props.withCompletedCheck && <th>Completado</th>}
           {props.labels.map((label, i) => (
             <th key={i}>{label}</th>
           ))}
@@ -15,6 +16,7 @@ const CustomTable = (props) => {
       <tbody>
         {props.data.map((item, i) => (
           <CustomTableItem
+            withCompletedCheck={props.withCompletedCheck ? true : false}
             item={item}
             labelOrder={props.labelOrder}
             index={i}

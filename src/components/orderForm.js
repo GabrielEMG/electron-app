@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import db from "../db";
 import CustomInput from "./customInput";
 import { useDispatch } from "react-redux";
-import { Button } from "@material-ui/core";
 import AutocompleteClient from "./autocompleteClient";
 
 const OrderForm = (props) => {
@@ -12,9 +11,17 @@ const OrderForm = (props) => {
     price: 0,
     quantity: 0,
     delivery: false,
+    completed: false,
     type: "",
-    queue: true,
   });
+
+  useEffect(() => {
+    if (props.doAction) {
+      handleClick();
+      props.setDoAction(false);
+      props.setShow(false);
+    }
+  }, [props.doAction]);
 
   const handleClick = async () => {
     try {
@@ -43,9 +50,6 @@ const OrderForm = (props) => {
         name="quantity"
         onChange={setState}
       />
-      <Button variant="contained" color="primary" onClick={() => handleClick()}>
-        Agregar orden
-      </Button>
     </div>
   );
 };

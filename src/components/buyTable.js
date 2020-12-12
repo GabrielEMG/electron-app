@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CustomTable from "./customTable";
-import FilterSearcher from "../components/filterSearcher";
+import FilterSearcher from "./filterSearcher";
 import { useSelector } from "react-redux";
 
 const BuyTable = () => {
