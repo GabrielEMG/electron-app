@@ -37,7 +37,7 @@ const HomePage = () => {
       </div>
       <div>
         <PopMenu action="Agregar compra" buttonTitle="Agregar compra">
-          <BuyForm />
+          <BuyForm year={state.year} month={state.month} />
         </PopMenu>
         <PopMenu action="Agregar cliente" buttonTitle="Agregar cliente">
           <ClientForm />
