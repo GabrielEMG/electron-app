@@ -1,55 +1,41 @@
 import { Button } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import months from "../helpers/dateButtons";
+import getMonths from "../helpers/getMonths";
 
 const NavigationDate = (props) => {
   const orders = useSelector((selector) => selector.orders);
-  const [years, setYears] = useState([2020]);
+  const [state, setState] = useState([]);
 
   useEffect(() => {
     if (orders.length > 1) {
-      const lastYear = orders[0].createdAt.getFullYear();
-      const firstYear = orders[orders.length - 1].createdAt.getFullYear();
-      const diference = 1 + lastYear - firstYear;
-      const yrs = new Array(diference).fill(lastYear).map((e, i) => e - i);
-      console.log(yrs);
-      setYears(yrs);
+      setState(
+        getMonths(orders[0].createdAt, orders[orders.length - 1].createdAt)
+      );
     }
   }, [orders]);
 
-  const changeYear = (year) => {
-    props.setDate((prev) => {
-      return { ...prev, year };
-    });
-  };
-  const changeMonth = (month) => {
-    props.setDate((prev) => {
-      return { ...prev, month };
-    });
+  const handleClick = (date) => {
+    props.setDate(date);
   };
 
   return (
     <div>
-      <div>
-        años
-        {years.map((year) => (
-          <Button
-            key={year}
-            onClick={(e) => changeYear(year)}
-            variant="contained"
-            color={props.date.year === year ? "primary" : "secondary"}
-          >
-            {year}
-          </Button>
-        ))}
-      </div>
-      mes
-      <Button variant="contained" onClick={(e) => changeMonth(10)}>
-        noviembre
-      </Button>
-      <Button variant="contained" onClick={(e) => changeMonth(11)}>
-        diciembre
-      </Button>
+      {state.map((date, i) => (
+        <Button
+          key={i}
+          variant="contained"
+          color={
+            props.date.month === date.month && props.date.year === date.year
+              ? "primary"
+              : "secondary"
+          }
+          onClick={() => handleClick(date)}
+        >
+          {`${months[date.month]} - ${date.year}`}
+        </Button>
+      ))}
     </div>
   );
 };

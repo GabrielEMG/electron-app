@@ -7,7 +7,7 @@ const monthFilter = (data, month, year) => {
       )
         return doc;
     });
-  }
+  } else return [];
 };
 
 export default monthFilter;

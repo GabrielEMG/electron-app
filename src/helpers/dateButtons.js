@@ -1,4 +1,4 @@
-const Months = [
+const months = [
   "Enero",
   "Febrero",
   "Marzo",
@@ -8,9 +8,9 @@ const Months = [
   "Julio",
   "Agosto",
   "Septiembre",
-  "Octubre", 
+  "Octubre",
   "Noviembre",
-  "Diciembre"
-],
+  "Diciembre",
+];
 
-export default Months
+export default months;
